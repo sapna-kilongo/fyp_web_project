@@ -1,5 +1,5 @@
 const express = require('express');
-const bodyparser = require('body-parser');
+var bodyParser = require('body-parser')
 const Vonage = require('@vonage/server-sdk');
 require('dotenv').config();
 const port = process.env.PORT || 8000;
@@ -8,22 +8,34 @@ const port = process.env.PORT || 8000;
 //apiKey: NEXMO_API_KEY,
 //apiSecret: NEXMO_API_SECRET
 //})
-const handlebars = require('express-handlebars');
+const exphbs = require('express-handlebars');
 const home = require('./routes/home');
+const authentication = require('./routes/authentication');
 const app = express();
 
 // body parser
-app.use(bodyparser.urlencoded({ extended: false }));
-app.use(express.json());
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 app.use(express.static('public'));
 
 // template engne
-app.engine('handlebars', handlebars());
-app.set('view engine', '.hbs');
+app.engine(
+    'hbs',
+    exphbs({
+        defaultLayout: 'main',
+        extname: '.hbs',
+    })
+);
+
+app.set('view engine', 'hbs');
 
 // routes
 app.use('/', home);
+app.use('/account', authentication);
 
 app.listen(port, () => {
     console.log('run on port $ {{ port }}');
