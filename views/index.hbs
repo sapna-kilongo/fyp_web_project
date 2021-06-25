@@ -1,1 +1,35 @@
-{{  title  }}
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-body">
+                <h1 class="my-4 text-align-center logo"  >USER LIST</h1>
+              <table class="table table-hover table-bordered" id="sampleTable">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>House Number </th>
+                    <th>meter number</th> 
+                                                                  
+                  </tr>
+                </thead>
+                <tbody>
+                   {{#each data}}
+                  <tr>  
+                    <td>{{this.name}}</td>
+                    <td>{{this.meter_number}}</td>
+                    <td>{{this.house_number}}</td>   
+                   <td><a class="btn btn-outline" href="/views/{{this.meter_number}}">delete</a></td> 
+                    <td><button class="btn btn-primary" type="submit">Edit</button></td> 
+                    <td><a class="btn btn-danger" href="/{{this.meter_number}}">delete</a></td>  
+                  </tr>
+                   {{/each}}  
+                 
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>

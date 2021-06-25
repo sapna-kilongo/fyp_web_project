@@ -1,0 +1,42 @@
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-body">
+                <h1 class="my-4 text-align-center logo"  >WELCOME  {{user.name}} </h1>
+                 {{{checkingAlert value user.name}}}
+
+
+                {{#if data}}
+              <table class="table table-hover table-bordered" id="sampleTable">
+                <thead>
+                  <tr>
+                    <th>meter number</th>
+                    <th>bill </th>        
+                    <th>date</th>
+                    <th>time</th>
+                    <th>payment</th>                                                  
+                  </tr>
+                </thead>
+                <tbody>
+                   {{#each data}}
+                  <tr>  
+                    <td>{{this.meter_number}}</td>
+                    <td>{{this.cost}}</td>
+                     <td>{{formateDate this.date 'DD-MM-YYYY' }}</td> 
+                     <td>{{this.time}}</td>
+                    <td>{{{checking this.status this.meter_number}}}</td>
+                  </tr>
+                   {{/each}}  
+                 
+                  
+                </tbody>
+                <div class="m-auto"> <a class="btn btn-lg btn-primary" href="/account/getAll">History</a></div>
+                {{else}}
+                <p>you dont have the bill</p>
+              </table> 
+                {{/if}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>

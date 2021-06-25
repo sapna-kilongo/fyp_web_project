@@ -1,0 +1,8 @@
+ const sql="SELECT from cost WHERE meter_number=?"
+    conn.query(sql,[value],(err,result)=>{
+    if (err) {
+        res.render('errors/500')
+    }
+     res.redirect('/account/getAll')
+
+    })
